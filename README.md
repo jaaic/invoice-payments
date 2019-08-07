@@ -1,4 +1,4 @@
-## Bank Api
+## Invoice Payments Api
 
 A REST API to transfer funds from the sender's account to receiver's account using PHP framework lumen - https://lumen.laravel.com/
 
@@ -92,12 +92,14 @@ Check the response
     "past": {
         "email": 1,
         "sms": 1,
-        "notification": 1
+        "notification": 1,
+        "total": 3
     },
     "upcoming": {
         "email": 2,
         "sms": 2,
-        "notification": 2
+        "notification": 2,
+        "total": 6
     }
 }
 `
@@ -115,3 +117,4 @@ How would you keep track of this kind of data?
 ## Assumptions 
 1. There is some job which inserts the invoices in database. The seeder does that task.
 2. The commands to generate and trigger reminders can be set up as cron jobs to run at fixed schedule.
+3. There is a front end hook to catch the broadcast notifications using Echo

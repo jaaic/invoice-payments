@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\InvoicePayment;
-use App\Notifications\PaymentReminder;
+use App\Notifications\PaymentCompleteNotification;
 use Illuminate\Support\Facades\Notification;
 
 class SendInvoicePaymentNotification
@@ -27,12 +27,12 @@ class SendInvoicePaymentNotification
     public function handle(InvoicePayment $event)
     {
         Notification::route('mail', $event->invoice->owner_email)
-            ->notify(new PaymentReminder($event->invoice));
+            ->notify(new PaymentCompleteNotification($event->invoice));
 
         Notification::route('sms', $event->invoice->owner_phone_number)
-            ->notify(new PaymentReminder($event->invoice));
+            ->notify(new PaymentCompleteNotification($event->invoice));
 
         Notification::route('broadcast', $event->invoice->owner_phone_number)
-            ->notify(new PaymentReminder($event->invoice));
+            ->notify(new PaymentCompleteNotification($event->invoice));
     }
 }

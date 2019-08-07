@@ -75,14 +75,10 @@ class TriggerPaymentReminders extends Command
         $triggeredReminders = [];
         // route notification to respective channel : mail, sms or broadcast
         foreach ($reminders as $reminder) {
-
-            /*
             if (!empty($reminder->to && !empty($route))) {
                 Notification::route($route, $reminder->to)
                     ->notify(new PaymentReminder($reminder));
             }
-            */
-
             // collect the reminder id to be marked in order to not trigger next time
             $triggeredReminders[] = $reminder->id;
         }

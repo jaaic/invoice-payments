@@ -10,6 +10,7 @@ use App\Modules\Invoicing\Factory\ReminderFactory;
 
 class NotificationStatsService
 {
+    const TOTAL = 'total';
     protected $accountNr;
     protected $pastDays;
     protected $nextDays;
@@ -55,7 +56,8 @@ class NotificationStatsService
         return [
             Constants::CHANNEL_EMAIL => $triggeredEmails,
             Constants::CHANNEL_SMS => $triggeredSms,
-            Constants::CHANNEL_NOTIFICATION => $triggeredNotifications
+            Constants::CHANNEL_NOTIFICATION => $triggeredNotifications,
+            static::TOTAL => $triggeredEmails + $triggeredSms + $triggeredNotifications
         ];
     }
 
@@ -68,7 +70,8 @@ class NotificationStatsService
         return [
             Constants::CHANNEL_EMAIL => $upcomingEmails,
             Constants::CHANNEL_SMS => $upcomingSms,
-            Constants::CHANNEL_NOTIFICATION => $upcomingNotifications
+            Constants::CHANNEL_NOTIFICATION => $upcomingNotifications,
+            static::TOTAL => $upcomingEmails + $upcomingSms + $upcomingNotifications
         ];
     }
 }
